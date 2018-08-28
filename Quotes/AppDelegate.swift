@@ -12,9 +12,28 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var userData = UserDefaults.standard
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var firstVC = storyBoard.instantiateViewController(withIdentifier: "AboutBoard")
+        
+        if userData.bool(forKey: "aboutComplete"){
+            
+            firstVC = storyBoard.instantiateViewController(withIdentifier: "MainAppBoard")
+            
+        }
+        
+        
+        window?.rootViewController = firstVC
+        window?.makeKeyAndVisible()
+        
+        
         // Override point for customization after application launch.
         return true
     }
